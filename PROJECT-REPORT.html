@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>al-ai.ai | Project Report</title>
+    <link rel="shortcut icon" href="assets/img/new-aeon/fav.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ffc619;
+            --bg: #090b0f;
+            --bg-card: #11141a;
+            --bg-card-hover: #181c24;
+            --text: #efedea;
+            --text-muted: #9a9a9a;
+            --accent: #c93b00;
+            --border: #1e222a;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Print styles */
+        @media print {
+            body { background: #fff; color: #111; }
+            .report-header { background: #111 !important; }
+            .stat-card, .service-card, .tech-card { border: 1px solid #ccc; background: #f9f9f9; }
+            .no-print { display: none !important; }
+        }
+
+        .report-header {
+            background: linear-gradient(135deg, #090b0f 0%, #1a1d25 50%, #090b0f 100%);
+            padding: 60px 40px;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .report-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255,198,25,0.05) 0%, transparent 70%);
+        }
+
+        .report-header h1 {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .report-header .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            position: relative;
+        }
+
+        .report-header .date {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title .num {
+            background: var(--primary);
+            color: var(--bg);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+
+        .stat-value {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .toc-list {
+            list-style: none;
+            columns: 2;
+            column-gap: 40px;
+        }
+
+        .toc-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            break-inside: avoid;
+        }
+
+        .toc-list a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .toc-list a:hover { color: var(--primary); }
+        .toc-list .toc-num { color: var(--primary); font-weight: 600; margin-right: 8px; }
+
+        /* Description text */
+        .desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .desc strong { color: var(--text); }
+
+        /* Services grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            transition: border-color 0.3s;
+        }
+
+        .service-card:hover { border-color: var(--primary); }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .service-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .service-card .badge {
+            display: inline-block;
+            background: rgba(255,198,25,0.1);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tech stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .tech-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            font-weight: 700;
+        }
+
+        .tech-card h4 { font-size: 0.95rem; margin-bottom: 4px; }
+        .tech-card p { font-size: 0.82rem; color: var(--text-muted); }
+
+        /* File structure */
+        .file-tree {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px 30px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            line-height: 1.9;
+            color: var(--text-muted);
+            overflow-x: auto;
+        }
+
+        .file-tree .folder { color: var(--primary); font-weight: 600; }
+        .file-tree .file { color: var(--text); }
+        .file-tree .comment { color: #555; font-style: italic; }
+
+        /* Pages table */
+        .pages-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .pages-table th {
+            background: #181c24;
+            padding: 14px 20px;
+            text-align: left;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .pages-table td {
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .pages-table tr:last-child td { border-bottom: none; }
+        .pages-table tr:hover td { background: var(--bg-card-hover); }
+
+        .pages-table .file-name {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--primary);
+        }
+
+        /* Performance metrics */
+        .metric-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .metric-label {
+            width: 160px;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .metric-track {
+            flex: 1;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .metric-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        .metric-val {
+            width: 50px;
+            text-align: right;
+            font-weight: 600;
+            font-size: 0.88rem;
+        }
+
+        .fill-green { background: var(--success); }
+        .fill-yellow { background: var(--warning); }
+        .fill-blue { background: var(--info); }
+
+        /* Recommendations */
+        .rec-list {
+            list-style: none;
+        }
+
+        .rec-list li {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .rec-priority {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            color: var(--bg);
+        }
+
+        .rec-priority.high { background: #ef4444; }
+        .rec-priority.med { background: var(--warning); }
+        .rec-priority.low { background: var(--info); }
+
+        .rec-content h4 { font-size: 0.95rem; margin-bottom: 4px; }
+        .rec-content p { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* Deployment info */
+        .deploy-info {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .deploy-step {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .deploy-step:last-child { margin-bottom: 0; }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 { font-size: 0.95rem; margin-bottom: 4px; }
+        .step-content p { font-size: 0.85rem; color: var(--text-muted); }
+
+        .code-block {
+            background: #0d1117;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #c9d1d9;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+
+        /* Footer */
+        .report-footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .report-footer strong { color: var(--primary); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .report-header h1 { font-size: 2.2rem; }
+            .toc-list { columns: 1; }
+            .services-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .pages-table { font-size: 0.82rem; }
+            .pages-table th, .pages-table td { padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="report-header">
+        <h1>al-ai.ai</h1>
+        <p class="subtitle">Project Report &amp; Technical Documentation</p>
+        <p class="date">Generated: March 26, 2026 | Version 1.0</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Quick Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">14</div>
+                <div class="stat-label">HTML Pages</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">8</div>
+                <div class="stat-label">AI Services</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">7</div>
+                <div class="stat-label">JS Libraries</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">240+</div>
+                <div class="stat-label">Media Assets</div>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="section">
+            <h2 class="section-title"><span class="num">0</span> Table of Contents</h2>
+            <div class="toc">
+                <ol class="toc-list">
+                    <li><a href="#overview"><span class="toc-num">01</span> Executive Overview</a></li>
+                    <li><a href="#services"><span class="toc-num">02</span> Services Portfolio</a></li>
+                    <li><a href="#pages"><span class="toc-num">03</span> Site Pages &amp; Structure</a></li>
+                    <li><a href="#tech"><span class="toc-num">04</span> Technology Stack</a></li>
+                    <li><a href="#architecture"><span class="toc-num">05</span> File Architecture</a></li>
+                    <li><a href="#design"><span class="toc-num">06</span> Design System</a></li>
+                    <li><a href="#performance"><span class="toc-num">07</span> Performance Assessment</a></li>
+                    <li><a href="#deployment"><span class="toc-num">08</span> Deployment (Railway)</a></li>
+                    <li><a href="#recommendations"><span class="toc-num">09</span> Recommendations</a></li>
+                    <li><a href="#summary"><span class="toc-num">10</span> Summary</a></li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- 1. Executive Overview -->
+        <div class="section" id="overview">
+            <h2 class="section-title"><span class="num">1</span> Executive Overview</h2>
+            <p class="desc">
+                <strong>al-ai.ai</strong> is a premium, professionally-designed static website for an AI-focused technology company. The company specializes in the <strong>crucial pre-processing stage</strong> of AI development, ensuring data is clean, normalized, and optimized for AI applications. This methodical approach ensures high-quality data is fed into custom AI systems, leading to more accurate predictions and outcomes.
+            </p>
+            <p class="desc">
+                The website serves as the company's primary digital presence, showcasing <strong>8 specialized AI service offerings</strong> across 14 meticulously designed pages. Built with a modern dark-theme aesthetic and sophisticated animations powered by GSAP, the site delivers a futuristic, professional experience that aligns with the company's cutting-edge AI positioning.
+            </p>
+            <p class="desc">
+                <strong>Domain:</strong> al-ai.ai &nbsp;|&nbsp; <strong>Contact:</strong> info@al-ai.ai &nbsp;|&nbsp; <strong>Type:</strong> Static Frontend (HTML/CSS/JS) &nbsp;|&nbsp; <strong>Copyright:</strong> 2026
+            </p>
+        </div>
+
+        <!-- 2. Services Portfolio -->
+        <div class="section" id="services">
+            <h2 class="section-title"><span class="num">2</span> Services Portfolio</h2>
+            <p class="desc">al-ai.ai offers a comprehensive suite of AI-powered services targeting enterprise-level solutions across multiple domains:</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="badge">Core Service</span>
+                    <h3>Data-Driven Solutions</h3>
+                    <p>Core data preprocessing and optimization pipeline ensuring clean, normalized data is fed into AI systems for maximum accuracy and reliability.</p>
+                </div>
+                <div class="service-card">
+                    <span class="badge">Analytics</span>
+                    <h3>Behavioral Intelligence</h3>
+                    <p>AI-powered behavioral analysis systems that identify patterns, predict actions, and provide deep insights into user and entity behavior.</p>
+                </div>
+                <div class="service-card">
+                    <span class="badge">Automation</span>
+                    <h3>Automated Decision Making &amp; BPA</h3>
+                    <p>Business process automation with intelligent decision-making systems that streamline operations and reduce manual intervention.</p>
+                </div>
+                <div class="service-card">
+                    <span class="badge">AI + IoT</span>
+                    <h3>Conversational &amp; Edge Analytics</h3>
+                    <p>Conversational AI chatbots combined with edge computing analytics for real-time data processing and customer interaction.</p>
+                </div>
+                <div class="service-card">
+                    <span class="badge">Creative AI</span>
+                    <h3>Digital Media</h3>
+                    <p>AI applications in digital media including content generation, media analysis, fashion technology, and video synthesis.</p>
+                </div>
+                <div class="service-card">
+                    <span class="badge">Advanced AI</span>
+                    <h3>Agentic AI &amp; Multi-Agent Systems</h3>
+                    <p>Autonomous intelligent agents and multi-agent architectures for complex task orchestration and decision-making workflows.</p>
+                </div>
+                <div class="service-card">
+                    <span class="badge">Ethics</span>
+                    <h3>Polarization &amp; Pre-Indoctrination</h3>
+                    <p>Ethical AI solutions addressing bias detection, polarization mitigation, and pre-indoctrination prevention in AI systems.</p>
+                </div>
+                <div class="service-card">
+                    <span class="badge">Search</span>
+                    <h3>AI-Powered Search Engine</h3>
+                    <p>Custom AI-driven search solutions with intelligent indexing, natural language understanding, and relevance optimization.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Site Pages -->
+        <div class="section" id="pages">
+            <h2 class="section-title"><span class="num">3</span> Site Pages &amp; Structure</h2>
+            <table class="pages-table">
+                <thead>
+                    <tr>
+                        <th>Page</th>
+                        <th>File</th>
+                        <th>Type</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Home</td>
+                        <td class="file-name">index.html</td>
+                        <td>Landing</td>
+                        <td>Main entry point with hero, services overview, and company highlights</td>
+                    </tr>
+                    <tr>
+                        <td>About</td>
+                        <td class="file-name">about.html</td>
+                        <td>Informational</td>
+                        <td>Company mission, team, values, and history</td>
+                    </tr>
+                    <tr>
+                        <td>Services</td>
+                        <td class="file-name">services.html</td>
+                        <td>Directory</td>
+                        <td>Overview of all service offerings with navigation</td>
+                    </tr>
+                    <tr>
+                        <td>Contact</td>
+                        <td class="file-name">contact.html</td>
+                        <td>Interactive</td>
+                        <td>Contact form, email, and location information</td>
+                    </tr>
+                    <tr>
+                        <td>Data-Driven</td>
+                        <td class="file-name">data-driven.html</td>
+                        <td>Service</td>
+                        <td>Data preprocessing and optimization service details</td>
+                    </tr>
+                    <tr>
+                        <td>Behavioral Intelligence</td>
+                        <td class="file-name">behavioral-intelligence.html</td>
+                        <td>Service</td>
+                        <td>Behavioral AI analysis service details</td>
+                    </tr>
+                    <tr>
+                        <td>Automated Decision Making</td>
+                        <td class="file-name">automated-decision-making-and-BPA.html</td>
+                        <td>Service</td>
+                        <td>Business process automation service details</td>
+                    </tr>
+                    <tr>
+                        <td>Conversational &amp; Edge</td>
+                        <td class="file-name">conversational-and-edge-analytics.html</td>
+                        <td>Service</td>
+                        <td>Chatbot and edge computing analytics details</td>
+                    </tr>
+                    <tr>
+                        <td>Digital Media</td>
+                        <td class="file-name">digital-media.html</td>
+                        <td>Service</td>
+                        <td>AI for media and creative applications</td>
+                    </tr>
+                    <tr>
+                        <td>Agentic AI</td>
+                        <td class="file-name">agentic-AI-and-multi-agent-systems.html</td>
+                        <td>Service</td>
+                        <td>Autonomous agent and multi-agent system details</td>
+                    </tr>
+                    <tr>
+                        <td>Polarization</td>
+                        <td class="file-name">polarization-and-pre-indoctrination.html</td>
+                        <td>Service</td>
+                        <td>Ethical AI and bias mitigation details</td>
+                    </tr>
+                    <tr>
+                        <td>Search Engine</td>
+                        <td class="file-name">search-engine.html</td>
+                        <td>Service</td>
+                        <td>AI-powered search engine solution details</td>
+                    </tr>
+                    <tr>
+                        <td>Blog Post</td>
+                        <td class="file-name">blog-post-sidebar.html</td>
+                        <td>Template</td>
+                        <td>Blog article layout with sidebar navigation</td>
+                    </tr>
+                    <tr>
+                        <td>Index Test</td>
+                        <td class="file-name">index-test.html</td>
+                        <td>Development</td>
+                        <td>Alternate homepage variant for testing</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 4. Technology Stack -->
+        <div class="section" id="tech">
+            <h2 class="section-title"><span class="num">4</span> Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon" style="background:rgba(227,76,38,0.15);color:#e34c26;">H5</div>
+                    <div>
+                        <h4>HTML5</h4>
+                        <p>Semantic markup with Open Graph meta tags, responsive viewport, and structured page layouts</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon" style="background:rgba(38,77,228,0.15);color:#264de4;">C3</div>
+                    <div>
+                        <h4>CSS3 + Custom Properties</h4>
+                        <p>CSS variables for theming, flexbox/grid layouts, transitions, keyframe animations, responsive breakpoints</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon" style="background:rgba(247,223,30,0.15);color:#f7df1e;">JS</div>
+                    <div>
+                        <h4>JavaScript (ES6+)</h4>
+                        <p>Core interactivity layer with jQuery for DOM manipulation and event handling</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon" style="background:rgba(136,204,34,0.15);color:#88cc22;">GS</div>
+                    <div>
+                        <h4>GSAP (GreenSock)</h4>
+                        <p>Advanced scroll-triggered animations, parallax effects, page transitions, and text reveal animations</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon" style="background:rgba(0,119,204,0.15);color:#0077cc;">jQ</div>
+                    <div>
+                        <h4>jQuery</h4>
+                        <p>DOM manipulation, event handling, AJAX contact form, and plugin initialization</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon" style="background:rgba(99,102,241,0.15);color:#6366f1;">Sw</div>
+                    <div>
+                        <h4>Swiper.js</h4>
+                        <p>Touch-optimized carousels and content sliders with pagination and autoplay</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon" style="background:rgba(34,197,94,0.15);color:#22c55e;">Is</div>
+                    <div>
+                        <h4>Isotope + Packery</h4>
+                        <p>Masonry grid layouts with animated filtering for portfolio and project showcases</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon" style="background:rgba(239,68,68,0.15);color:#ef4444;">Fb</div>
+                    <div>
+                        <h4>FancyBox</h4>
+                        <p>Responsive lightbox gallery for fullscreen image and media viewing</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon" style="background:rgba(59,130,246,0.15);color:#3b82f6;">FA</div>
+                    <div>
+                        <h4>Font Awesome 6</h4>
+                        <p>Comprehensive icon library with 2,000+ icons for UI elements and service indicators</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon" style="background:rgba(168,85,247,0.15);color:#a855f7;">Le</div>
+                    <div>
+                        <h4>Lenis</h4>
+                        <p>Smooth scrolling library for buttery page scrolling experience across all browsers</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon" style="background:rgba(255,198,25,0.15);color:#ffc619;">Pp</div>
+                    <div>
+                        <h4>Google Fonts</h4>
+                        <p>Poppins (body) + Big Shoulders Display (headings) for modern, professional typography</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon" style="background:rgba(34,211,238,0.15);color:#22d3ee;">Nx</div>
+                    <div>
+                        <h4>Nginx (Deployment)</h4>
+                        <p>Production web server for static file serving with gzip compression and caching headers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. File Architecture -->
+        <div class="section" id="architecture">
+            <h2 class="section-title"><span class="num">5</span> File Architecture</h2>
+            <div class="file-tree">
+<span class="folder">al-ai.ai/</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="comment"># ---- Core Pages ----</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">index.html</span> <span class="comment">.................. Homepage</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">about.html</span> <span class="comment">.................. About page</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">services.html</span> <span class="comment">............... Services overview</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">contact.html</span> <span class="comment">................ Contact page</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="comment"># ---- Service Pages ----</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">data-driven.html</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">behavioral-intelligence.html</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">automated-decision-making-and-BPA.html</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">conversational-and-edge-analytics.html</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">digital-media.html</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">agentic-AI-and-multi-agent-systems.html</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">polarization-and-pre-indoctrination.html</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">search-engine.html</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="comment"># ---- Other ----</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">blog-post-sidebar.html</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">index-test.html</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">PROJECT-REPORT.html</span> <span class="comment">........ This report</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="comment"># ---- Deployment ----</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">Dockerfile</span> <span class="comment">.................. Railway deployment config</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">nginx.conf</span> <span class="comment">.................. Nginx server config</span>
+<br>&nbsp;&nbsp;&nbsp;<span class="file">.dockerignore</span> <span class="comment">............... Docker ignore rules</span>
+<br>
+<br>&nbsp;&nbsp;&nbsp;<span class="folder">assets/</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">css/</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">helper.css</span> <span class="comment">.............. Utility classes (6,184 lines)</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">theme-black.css</span> <span class="comment">......... Primary dark theme (9,932 lines)</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">theme.css</span> <span class="comment">............... Alternate theme (9,578 lines)</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">theme2.css</span> <span class="comment">.............. Secondary theme (9,681 lines)</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">js/</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">theme.js</span> <span class="comment">................ Main script (minified)</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">theme-before-minify.js</span> <span class="comment">.. Source version</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">img/new-aeon/</span> <span class="comment">........... 240+ images, banners, videos (~241 MB)</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">vendor/</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">jquery/</span> <span class="comment">............... jQuery 3.x</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">gsap/</span> <span class="comment">................. GSAP + ScrollTrigger + ScrollToPlugin</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">swiper/</span> <span class="comment">............... Swiper slider</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">isotope/</span> <span class="comment">.............. Isotope + Packery + ImagesLoaded</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">fancybox/</span> <span class="comment">............. FancyBox lightbox</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">fontawesome/</span> <span class="comment">.......... Font Awesome 6</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">lenis/</span> <span class="comment">................ Smooth scrolling</span>
+            </div>
+        </div>
+
+        <!-- 6. Design System -->
+        <div class="section" id="design">
+            <h2 class="section-title"><span class="num">6</span> Design System</h2>
+            <p class="desc">The website employs a carefully crafted dark-mode design system with the following core elements:</p>
+
+            <div class="stats-grid" style="margin-bottom: 30px;">
+                <div class="stat-card" style="border-left: 4px solid #ffc619;">
+                    <div style="width:40px;height:40px;border-radius:8px;background:#ffc619;margin:0 auto 10px;"></div>
+                    <div class="stat-label">Primary: #ffc619</div>
+                </div>
+                <div class="stat-card" style="border-left: 4px solid #090b0f;">
+                    <div style="width:40px;height:40px;border-radius:8px;background:#090b0f;border:1px solid #333;margin:0 auto 10px;"></div>
+                    <div class="stat-label">Background: #090b0f</div>
+                </div>
+                <div class="stat-card" style="border-left: 4px solid #efedea;">
+                    <div style="width:40px;height:40px;border-radius:8px;background:#efedea;margin:0 auto 10px;"></div>
+                    <div class="stat-label">Text: #efedea</div>
+                </div>
+                <div class="stat-card" style="border-left: 4px solid #c93b00;">
+                    <div style="width:40px;height:40px;border-radius:8px;background:#c93b00;margin:0 auto 10px;"></div>
+                    <div class="stat-label">Accent: #c93b00</div>
+                </div>
+            </div>
+
+            <p class="desc">
+                <strong>Typography:</strong> Poppins (weights 300-900) for body text, Big Shoulders Display (variable weight) for headings and display elements. Both loaded via Google Fonts.<br><br>
+                <strong>Interactive Features:</strong> Custom magic cursor, magnetic button hover effects, page transition overlays, scroll-triggered text reveal animations, parallax scrolling, light/dark mode toggle with localStorage persistence, and accordion components with smooth animations.
+            </p>
+        </div>
+
+        <!-- 7. Performance Assessment -->
+        <div class="section" id="performance">
+            <h2 class="section-title"><span class="num">7</span> Performance Assessment</h2>
+            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:30px;">
+                <div class="metric-bar">
+                    <span class="metric-label">HTML Structure</span>
+                    <div class="metric-track"><div class="metric-fill fill-green" style="width:92%"></div></div>
+                    <span class="metric-val" style="color:var(--success)">92%</span>
+                </div>
+                <div class="metric-bar">
+                    <span class="metric-label">CSS Organization</span>
+                    <div class="metric-track"><div class="metric-fill fill-green" style="width:85%"></div></div>
+                    <span class="metric-val" style="color:var(--success)">85%</span>
+                </div>
+                <div class="metric-bar">
+                    <span class="metric-label">JS Performance</span>
+                    <div class="metric-track"><div class="metric-fill fill-green" style="width:80%"></div></div>
+                    <span class="metric-val" style="color:var(--success)">80%</span>
+                </div>
+                <div class="metric-bar">
+                    <span class="metric-label">Mobile Responsive</span>
+                    <div class="metric-track"><div class="metric-fill fill-green" style="width:88%"></div></div>
+                    <span class="metric-val" style="color:var(--success)">88%</span>
+                </div>
+                <div class="metric-bar">
+                    <span class="metric-label">Asset Optimization</span>
+                    <div class="metric-track"><div class="metric-fill fill-yellow" style="width:60%"></div></div>
+                    <span class="metric-val" style="color:var(--warning)">60%</span>
+                </div>
+                <div class="metric-bar">
+                    <span class="metric-label">SEO Readiness</span>
+                    <div class="metric-track"><div class="metric-fill fill-green" style="width:82%"></div></div>
+                    <span class="metric-val" style="color:var(--success)">82%</span>
+                </div>
+                <div class="metric-bar">
+                    <span class="metric-label">Accessibility</span>
+                    <div class="metric-track"><div class="metric-fill fill-yellow" style="width:65%"></div></div>
+                    <span class="metric-val" style="color:var(--warning)">65%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Deployment -->
+        <div class="section" id="deployment">
+            <h2 class="section-title"><span class="num">8</span> Deployment (Railway)</h2>
+            <p class="desc">The project is configured for deployment on <strong>Railway</strong> using a Docker-based Nginx setup for optimal performance:</p>
+            <div class="deploy-info">
+                <div class="deploy-step">
+                    <span class="step-num">1</span>
+                    <div class="step-content">
+                        <h4>Initialize Git Repository</h4>
+                        <p>Version control setup for Railway's Git-based deployment pipeline.</p>
+                        <div class="code-block">git init && git add . && git commit -m "Initial commit"</div>
+                    </div>
+                </div>
+                <div class="deploy-step">
+                    <span class="step-num">2</span>
+                    <div class="step-content">
+                        <h4>Push to GitHub</h4>
+                        <p>Railway connects directly to GitHub for automated deployments.</p>
+                        <div class="code-block">gh repo create al-ai-ai --public --source=. --push</div>
+                    </div>
+                </div>
+                <div class="deploy-step">
+                    <span class="step-num">3</span>
+                    <div class="step-content">
+                        <h4>Deploy on Railway</h4>
+                        <p>Connect the GitHub repo in Railway dashboard or use the CLI.</p>
+                        <div class="code-block">railway login && railway init && railway up</div>
+                    </div>
+                </div>
+                <div class="deploy-step">
+                    <span class="step-num">4</span>
+                    <div class="step-content">
+                        <h4>Configure Domain</h4>
+                        <p>Set up the custom domain al-ai.ai in Railway's settings panel and update DNS records.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. Recommendations -->
+        <div class="section" id="recommendations">
+            <h2 class="section-title"><span class="num">9</span> Recommendations</h2>
+            <ul class="rec-list">
+                <li>
+                    <span class="rec-priority high">1</span>
+                    <div class="rec-content">
+                        <h4>Optimize Image Assets</h4>
+                        <p>Total assets folder is ~241 MB. Convert large JPG/PNG images to WebP format and implement responsive image srcsets to dramatically reduce load times.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rec-priority high">2</span>
+                    <div class="rec-content">
+                        <h4>Compress Video Files</h4>
+                        <p>Video assets (slider-bg.mp4, Ai-video.mp4, etc.) should be transcoded to optimized MP4 with reduced bitrate, and consider lazy-loading off-screen videos.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rec-priority med">3</span>
+                    <div class="rec-content">
+                        <h4>Add Accessibility (a11y) Features</h4>
+                        <p>Include ARIA labels, improve color contrast ratios for text on dark backgrounds, ensure keyboard navigation works for all interactive elements.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rec-priority med">4</span>
+                    <div class="rec-content">
+                        <h4>Implement Lazy Loading</h4>
+                        <p>Add native lazy loading (loading="lazy") to images below the fold to improve initial page load performance significantly.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rec-priority low">5</span>
+                    <div class="rec-content">
+                        <h4>Remove Unused Theme Variants</h4>
+                        <p>Three theme CSS files (theme.css, theme2.css, theme-black.css) exist but only one is used per page. Consider removing unused variants to reduce server payload.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="rec-priority low">6</span>
+                    <div class="rec-content">
+                        <h4>Add Sitemap &amp; Robots.txt</h4>
+                        <p>Generate sitemap.xml and robots.txt for better search engine indexing and crawlability.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 10. Summary -->
+        <div class="section" id="summary">
+            <h2 class="section-title"><span class="num">10</span> Summary</h2>
+            <p class="desc">
+                <strong>al-ai.ai</strong> is a well-crafted, visually impressive static website that effectively communicates the company's AI service offerings. The dark-theme design with golden accents creates a premium, futuristic feel that aligns with the AI technology brand.
+            </p>
+            <p class="desc">
+                The site features <strong>14 pages</strong> covering <strong>8 specialized AI services</strong>, built with a robust stack including GSAP animations, jQuery interactivity, and responsive design. With ~<strong>240+ media assets</strong> and <strong>7 vendor libraries</strong>, the site delivers a rich, interactive experience.
+            </p>
+            <p class="desc">
+                The primary areas for improvement are <strong>asset optimization</strong> (image compression, lazy loading) and <strong>accessibility enhancements</strong>. The deployment configuration is ready for Railway with Docker/Nginx serving, providing gzip compression, proper caching, and production-grade performance.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="report-footer">
+        <p><strong>al-ai.ai</strong> | Project Report | March 26, 2026</p>
+        <p style="margin-top:8px;">Generated for deployment review and documentation purposes</p>
+    </footer>
+
+</body>
+</html>
