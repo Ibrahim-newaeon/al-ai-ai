@@ -1,0 +1,9 @@
+# Unused large video files (not referenced in any HTML page)
+assets/img/new-aeon/8.mp4
+assets/img/new-aeon/what-is-the-future1.mp4
+assets/img/new-aeon/slider-bg.mp4
+
+# OS files
+desktop.ini
+Thumbs.db
+.DS_Store
